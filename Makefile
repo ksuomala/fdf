@@ -1,0 +1,60 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/10/27 14:08:38 by ksuomala          #+#    #+#              #
+#    Updated: 2020/10/28 22:55:13 by ksuomala         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = fdf
+
+SRCS = main.c read_map.c test_fdf.c draw_map.c colors.c
+
+SRCS_DIR = srcs/
+
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+
+OBJ_DIR = obj
+
+LIBFT = libft/libft.a
+
+CC = gcc
+
+FLAGS = -Wall -Wextra -Werror
+
+LINKS = -I libft/ -L libft \
+	-I /usr/local/include -L /usr/local/lib \
+	-l mlx -l ft -framework OpenGL -framework Appkit
+
+.PHONY: all clean fclean re
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@$(CC) $(FLAGS) $(OBJS) -o $(NAME) $(LINKS)
+	@echo "executable compiled!"
+
+$(OBJS): $(LIBFT) $(SRCS)
+	@echo "Compiling..."
+	@$(CC) $(FLAGS) -c $(SRCS) -I libft
+	@echo "Compiled. Moving .o files..."
+	@mv $(SRCS:.c=.o) $(OBJ_DIR)/
+
+$(LIBFT):
+	@make -C libft
+
+clean:
+	@make -C libft clean
+	@rm -f $(OBJS)
+	@echo "*.o removed!"
+
+fclean: clean
+	@make -C libft fclean
+	@rm -f $(NAME)
+	@echo "Targets removed!"
+
+re: fclean all
