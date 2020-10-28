@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 23:17:55 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/28 17:30:50 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/10/29 00:16:52 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_pt		*ft_arr_atoi(char **split, t_map *fdf, int y)
 		ret[i].z = ft_atoi(split[i]);
 		ret[i].x = i;
 		ret[i].y = y;
+		ret[i].color = ft_color(ret[i].z);
 		i++;
 	}
 	return (ret);

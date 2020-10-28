@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 17:08:45 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/28 22:54:07 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/10/29 00:15:15 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,6 @@ void	ft_keypress(t_map *fdf);
 int		ft_key_mod(int key, t_bitmap *img);
 int		ft_scale(t_map *fdf, t_bitmap *map);
 int		ft_color(int height);
+int		ft_average_rgb(int start, int end);
+
 #endif

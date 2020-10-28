@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 19:51:28 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/28 22:53:13 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/10/29 00:20:21 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,14 @@ void	ft_drawline(t_pt start, t_pt end, t_bitmap *map)
 //	x = start.x;
 //	y = start.y;
 	i = 1;
-	color = ft_color(start.z);
+//	color = ft_color(start.z);
 //	change = ft_next_pixel_color(start.z, end.z, step);
 	while (i <= step)
 	{
-
+		if (start.color != end.color)
+			color = ft_average_rgb(start.color, end.color);
+		else
+			color = start.color;
 		ft_putpixel(start.x, start.y, map, color);
 //		x = x + dx;
 		start.x = start.x + dx;
