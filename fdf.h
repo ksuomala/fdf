@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 17:08:45 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/29 00:15:15 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/10/31 22:24:07 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 typedef struct	s_pt
 {
 	int			color;
-	int			z;
+	float		z;
 	float		x;
 	float		y;
 }				t_pt;
@@ -49,6 +49,8 @@ typedef struct	s_bitmap
 	int			height;
 	int			move_y;
 	int			move_x;
+	int			outside_x;
+	int			outside_y;
 }				t_bitmap;
 
 typedef struct	s_map

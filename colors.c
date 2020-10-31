@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 22:46:01 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/29 00:26:59 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/10/31 19:43:01 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ int		ft_average_rgb(int start, int end)
 	red = ft_red(start, end);
 	green = ft_green(start, end);
 	blue = ft_blue(start, end);
-	ft_printf("start|end = |%d|%d|, red = |%d|,green = |%d| blue = |%d| \n", start, end, red, green, blue);
-	return (red + green + blue);
+//	ft_printf("start|end = |%d|%d|, red = |%d|,green = |%d| blue = |%d| \n", start, end, red, green, blue);
+	//return (red + green + blue);
+	return (0xFF00FF);
 }
 
 int		ft_color(int height)
@@ -83,5 +84,5 @@ int		ft_color(int height)
 		color = 0x0000FF;
 	else
 		color = 0x00FF00;
-	return (color);
+	return (0x00FF00);
 }
