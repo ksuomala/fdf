@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 23:40:42 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/28 22:24:35 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/01 18:43:48 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@
 // 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
 // }
 
+void	ft_switch(int *switch_projection)
+{
+	if (*switch_projection == 2)
+		*switch_projection = 0;
+	else
+		*switch_projection += 1;
+}
+
 void	ft_zoom(t_map *fdf, int dir)
 {
 	if (dir)
@@ -86,6 +94,14 @@ int		ft_keys(int key, t_map *fdf)
 		ft_zoom(fdf, 1);
 	if (key == MINUS)
 		ft_zoom(fdf, 0);
+	if (key == Q)
+		fdf->img->amp += 0.1;
+	if (key == Z)
+		fdf->img->amp -= 0.1;
+	if (key == P)
+		ft_switch(&fdf->img->pro);
+	if (key == Y)
+		fdf->img->pro = -1;
 	ft_draw_image(fdf);
 	return (0);
 }

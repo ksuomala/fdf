@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 17:08:45 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/31 22:24:07 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/01 18:43:58 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # define A_UP 126
 # define PLUS 24
 # define MINUS 27
+# define Q 12
+# define Z 6
+# define P 35
+# define Y 16
 
 # include <fcntl.h>
 # include "mlx.h"
@@ -51,6 +55,8 @@ typedef struct	s_bitmap
 	int			move_x;
 	int			outside_x;
 	int			outside_y;
+	float		amp;
+	int			pro;
 }				t_bitmap;
 
 typedef struct	s_map

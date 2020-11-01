@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 19:51:28 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/31 22:31:01 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/01 19:03:35 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_putpixel_iso(int x, int y, t_bitmap *map, int color)
 
 void	ft_multiply_scale(t_pt *start, t_pt *end, int scale)
 {
-	ft_printf("scale = %d", scale);
+//	ft_printf("scale = %d", scale);
 //	scale = 15;
 	start->x *= scale;
 	start->y *= scale;
@@ -86,8 +86,8 @@ void	ft_drawline(t_pt start, t_pt end, t_bitmap *map)
 	int		i;
 	int		color;
 //	int		change;
-	int		dx;
-	int		dy;
+	float	dx;
+	float	dy;
 	float	step;
 //	ft_n(2);
 //	ft_putnbr(start.x);
@@ -95,27 +95,27 @@ void	ft_drawline(t_pt start, t_pt end, t_bitmap *map)
 //	printf("PF__\ndrawline start xy = |%hhf|%hhf|, end = |%hhf|%hhf|\n", start.x, start.y, end.x, end.y);
 	ft_multiply_scale(&start, &end, map->scale);
 	//map->scale = 10;
-	ft_printf("drawline |%d|%d| -- |%d|%d|", start.y, start.x, end.y, end.x);
+//	ft_printf("drawline |%d|%d| -- |%d|%d|", start.y, start.x, end.y, end.x);
 	dx = (end.x - start.x);
 	dy = (end.y - start.y);
 //	ft_printf("dx = %d, dy = %d\n", dx, dy);
-	if (abs(dx) >= abs(dy))
-		step = abs(dx);
+	if (fabsf(dx) >= fabsf(dy))
+		step = fabsf(dx);
 	else
-		step = abs(dy);
+		step = fabsf(dy);
 	dx = dx / step;
 	dy = dy / step;
 //	x = start.x;
 //	y = start.y;
 	i = 1;
-	color = ft_color(start.z);
+	color = start.color;
 //	change = ft_next_pixel_color(start.z, end.z, step);
 	while (i <= step)
 	{
-	//	if (start.color != end.color)
-	//		color = ft_average_rgb(start.color, end.color);
-	//	else
-	//		color = start.color;
+		if (start.color != end.color)
+			color = ft_average_rgb(start.color, end.color);
+		else
+			color = start.color;
 		ft_putpixel(start.x, start.y, map, color);
 //		ft_putpixel_iso(start.x, start.y, map, color);
 //		ft_printf("putpxl |%d||%d|", start.x, start.y);
@@ -159,31 +159,73 @@ void	ft_not_in_window(t_bitmap *img)
 	img->outside_y = 0;
 }
 
-t_pt	ft_iso_xy(t_pt *p)
+t_pt	ft_iso_xy(t_pt *p, float amplitude)
 {
 	t_pt temp;
 
-	ft_printf("\npre conversion %d, %d, cos = %f\n", p->x, p->y, cos(0.523599));
+	temp.color = ft_color(p->z);
+	if (p->z)
+		temp.z = (p->z * (1.0 + amplitude)) / 2;
+	else
+		temp.z = p->z;
 	temp.x = (p->x - p->y) * cos(0.5235987756); //correct
-	temp.y = p->z + (p->x + p->y) * sin(0.5235987756);
-//	temp.y *= -1;
-	ft_printf("x = %d, y = %d", temp.x, temp.y);
-	temp.x = temp.x;
-	temp.y = temp.y;
+	temp.y = (p->x + p->y) * sin(0.5235987756) - temp.z;
 	return (temp);
 }
 
-t_pt	ft_mil_xy(t_pt *p)
+t_pt	ft_mil_xy(t_pt *p, float amplitude)
 {
 	t_pt temp;
 
-	ft_printf("\npre conversion %d, %d, cos = %f\n", p->x, p->y, cos(0.523599));
+//	ft_printf("\npre conversion %d, %d, cos = %f\n", p->x, p->y, cos(0.523599));
+	temp.color = ft_color(p->z);
+	if (p->z)
+		temp.z = (p->z * (1.0 + amplitude)) / 2;
+	else
+		temp.z = p->z;
 	temp.x = (p->x - p->y) * cos(0.7853981634); //correct
-	temp.y = p->z + (p->x + p->y) * sin(0.7853981634);
+	temp.y = (p->x + p->y) * sin(0.7853981634) - temp.z;
 //	temp.y *= -1;
-	ft_printf("x = %d, y = %d", temp.x, temp.y);
-	temp.x = temp.x;
-	temp.y = temp.y;
+//	ft_printf("x = %d, y = %d", temp.x, temp.y);
+//	temp.x = temp.x;
+//	temp.y = temp.y;
+	return (temp);
+}
+
+t_pt	ft_goofy_xy(t_pt *p, float amplitude)
+{
+	t_pt temp;
+
+//	ft_printf("\npre conversion %d, %d, cos = %f\n", p->x, p->y, cos(0.523599));
+	temp.color = ft_color(p->z);
+	if (p->z)
+		temp.z = (p->z * (1.0 + amplitude)) / 2;
+	else
+		temp.z = p->z;
+	temp.x = (p->x - p->y) * cos(0.3490658504); //correct
+	temp.y = (p->x + p->y) * sin(0.3490658504) - temp.z;
+//	temp.y *= -1;
+//	ft_printf("x = %d, y = %d", temp.x, temp.y);
+//	temp.x = temp.x;
+//	temp.y = temp.y;
+	return (temp);
+}
+
+t_pt	ft_goofy2_xy(t_pt *p, float amplitude)
+{
+	t_pt temp;
+
+//	ft_printf("\npre conversion %d, %d, cos = %f\n", p->x, p->y, cos(0.523599));
+	if (p->z)
+		temp.z = (p->z * (1.0 + amplitude)) / 2;
+	else
+		temp.z = p->z;
+	temp.x = (p->x - p->y) * cos(0.6981317008); //correct
+	temp.y = (p->x + p->y) * sin(0.6981317008) - temp.z;
+//	temp.y *= -1;
+//	ft_printf("x = %d, y = %d", temp.x, temp.y);
+//	temp.x = temp.x;
+//	temp.y = temp.y;
 	return (temp);
 }
 
@@ -195,6 +237,62 @@ t_pt cr(float x0, float y0)
 	ret.y = y0;
 
 	return (ret);
+}
+
+void ft_draw_map_goofy(t_map *fdf)
+{
+	int y;
+	int x;
+
+	ft_not_in_window(fdf->img);
+	x = fdf->img->outside_x;
+	y = fdf->img->outside_y;
+//	ft_printf("y = %d, x = %d", y, x);
+//	ft_drawline(cr(82, 20), cr(90, 12), fdf->img);
+	while (y < fdf->rows - fdf->img->outside_y)
+	{
+		while (x < fdf->row_len - fdf->img->outside_x)
+		{
+//			ft_printf("row_len = %d, x + 1 = %d, outside_x = %d", fdf->row_len, x + 1, fdf->img->outside_x);
+			if (x + 1 < fdf->row_len - fdf->img->outside_x)
+				ft_drawline(ft_goofy_xy(&fdf->map[y][x], fdf->img->amp), ft_goofy2_xy(&fdf->map[y][x + 1], fdf->img->amp), fdf->img);
+			if (y + 1 < fdf->rows - fdf->img->outside_y)
+				ft_drawline(ft_goofy_xy(&fdf->map[y][x], fdf->img->amp), ft_goofy2_xy(&fdf->map[y + 1][x], fdf->img->amp), fdf->img);
+			x++;
+		}
+		y++;
+		x = fdf->img->outside_x;
+	}
+//	ft_printf("q in bitmap\n");
+	ft_putimage(fdf, fdf->img);
+}
+
+void ft_draw_map_military(t_map *fdf)
+{
+	int y;
+	int x;
+
+	ft_not_in_window(fdf->img);
+	x = fdf->img->outside_x;
+	y = fdf->img->outside_y;
+//	ft_printf("y = %d, x = %d", y, x);
+//	ft_drawline(cr(82, 20), cr(90, 12), fdf->img);
+	while (y < fdf->rows - fdf->img->outside_y)
+	{
+		while (x < fdf->row_len - fdf->img->outside_x)
+		{
+//			ft_printf("row_len = %d, x + 1 = %d, outside_x = %d", fdf->row_len, x + 1, fdf->img->outside_x);
+			if (x + 1 < fdf->row_len - fdf->img->outside_x)
+				ft_drawline(ft_mil_xy(&fdf->map[y][x], fdf->img->amp), ft_mil_xy(&fdf->map[y][x + 1], fdf->img->amp), fdf->img);
+			if (y + 1 < fdf->rows - fdf->img->outside_y)
+				ft_drawline(ft_mil_xy(&fdf->map[y][x], fdf->img->amp), ft_mil_xy(&fdf->map[y + 1][x], fdf->img->amp), fdf->img);
+			x++;
+		}
+		y++;
+		x = fdf->img->outside_x;
+	}
+//	ft_printf("q in bitmap\n");
+	ft_putimage(fdf, fdf->img);
 }
 
 void ft_draw_map_isometric(t_map *fdf)
@@ -213,15 +311,15 @@ void ft_draw_map_isometric(t_map *fdf)
 		{
 //			ft_printf("row_len = %d, x + 1 = %d, outside_x = %d", fdf->row_len, x + 1, fdf->img->outside_x);
 			if (x + 1 < fdf->row_len - fdf->img->outside_x)
-				ft_drawline(ft_iso_xy(&fdf->map[y][x]), ft_iso_xy(&fdf->map[y][x + 1]), fdf->img);
+				ft_drawline(ft_iso_xy(&fdf->map[y][x], fdf->img->amp), ft_iso_xy(&fdf->map[y][x + 1], fdf->img->amp), fdf->img);
 			if (y + 1 < fdf->rows - fdf->img->outside_y)
-				ft_drawline(ft_iso_xy(&fdf->map[y][x]), ft_iso_xy(&fdf->map[y + 1][x]), fdf->img);
+				ft_drawline(ft_iso_xy(&fdf->map[y][x], fdf->img->amp), ft_iso_xy(&fdf->map[y + 1][x], fdf->img->amp), fdf->img);
 			x++;
 		}
 		y++;
 		x = fdf->img->outside_x;
 	}
-	ft_printf("q in bitmap\n");
+//	ft_printf("q in bitmap\n");
 	ft_putimage(fdf, fdf->img);
 }
 
@@ -274,6 +372,12 @@ void	ft_draw_image(t_map *fdf)
 	// 	x = 0;
 	// }
 	// ft_putimage(fdf, fdf->img);
-//	ft_draw_map(fdf);
-	ft_draw_map_isometric(fdf);
+	if (fdf->img->pro == 0)
+		ft_draw_map_isometric(fdf);
+	else if (fdf->img->pro == 1)
+		ft_draw_map_military(fdf);
+	else if (fdf->img->pro == 2)
+		ft_draw_map(fdf);
+	else
+		ft_draw_map_goofy(fdf);
 }

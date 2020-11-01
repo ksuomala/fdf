@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 22:46:01 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/31 19:43:01 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/01 18:34:37 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,5 @@ int		ft_color(int height)
 		color = 0x0000FF;
 	else
 		color = 0x00FF00;
-	return (0x00FF00);
+	return (color);
 }
