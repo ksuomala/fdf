@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 23:40:42 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/03 02:11:44 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/03 04:55:20 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,13 @@ void	ft_more_keys(int key, t_map *fdf)
 	if (key == P)
 		ft_switch(&fdf->img->pro);
 	if (key == Y)
-		fdf->img->pro = -1;
+		fdf->img->rot_y += 0.03;
+	if (key == R)
+		fdf->img->rot_z += 0.03;
+	if (key == T)
+		fdf->img->rot_x += 0.03;
+	//	ft_change_rotation(fdf);
+	//	ft_printf("scale = %d, height = %d, width = %d", fdf->img->scale, fdf->img->height, fdf->img->width);
 }
 
 int		ft_keys(int key, t_map *fdf)
@@ -111,3 +117,20 @@ void	ft_init_window(t_map *fdf)
 		fdf->img->b_map = (int*)mlx_get_data_addr(fdf->img->ptr, &fdf->img->bpp, &fdf->img->size_l, &fdf->img->endian);
 	fdf->img->size_l /= 4;
 }
+
+// void	ft_change_rotation(t_map *fdf)
+// {
+// 	int x = 0;
+// 	int y = 0;
+
+// 	while (y < fdf->end_y)
+// 	{
+// 		while (x < fdf->end_x)
+// 		{
+// 			ft_rotate_z(&fdf->map[y][x].x, &fdf->map[y][x].y, fdf->img->rot);
+// 			x++;
+// 		}
+// 		y++;
+// 		x = 0;
+// 	}
+// }
