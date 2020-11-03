@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 23:17:55 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/29 00:16:52 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/03 02:14:13 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_pt		*ft_arr_atoi(char **split, t_map *fdf, int y)
 		ret[i].x = i;
 		ret[i].y = y;
 		ret[i].color = ft_color(ret[i].z);
+//		ft_rotate_z(&ret[i].x, &ret[i].y, 0.333);
 		i++;
 	}
 	return (ret);
@@ -68,53 +69,6 @@ static void		ft_create_map(t_map *fdf, char *line)
 	ft_free2d(split);
 }
 
-// static void		ft_add_line(t_map *fdf, char *line)
-// {
-// 	char	**split;
-// 	int		**temp;
-
-// 	temp = NULL;
-// 	split = ft_strsplit(line, ' ');
-// 	if (!fdf->row_len)
-// 		while (split[fdf->row_len])
-// 			fdf->row_len++;
-// 	if (fdf->rows)
-// 	{
-// 		if (!(temp = ft_memalloc(sizeof(int*) * fdf->rows)))
-// 			ft_errors(0);
-// 		temp = ft_memcpy(temp, fdf->map, sizeof(int*) * fdf->rows);
-// 		free(fdf->map);
-// 	}
-// 	fdf->rows++;
-// 	fdf->map = ft_memalloc(sizeof(int*) * fdf->rows);
-// 	if (temp)
-// 	{
-// 		fdf->map = ft_memcpy(fdf->map, temp, sizeof(int*) * (fdf->rows - 1));
-// 		free(temp);
-// 	}
-// 	fdf->map[fdf->rows - 1] = ft_arr_atoi(split, fdf);
-// 	ft_free2d(split);
-// }
-
-// void			test(t_map *fdf)
-// {
-// 	int i;
-// 	int len;
-
-// 	i = 0;
-// 	len = 0;
-// 	while (i < fdf->rows)
-// 	{
-// 		while (len < fdf->row_len)
-// 		{
-// 			ft_printf("%d", fdf->map[i][len].z);
-// 			len++;
-// 		}
-// 		len = 0;
-// 		i++;
-// 	}
-// }
-
 void			ft_read_map(char **av, t_map *fdf)
 {
 	int		fd;
@@ -132,5 +86,4 @@ void			ft_read_map(char **av, t_map *fdf)
 			ft_errors(3);
 		ft_create_map(fdf, line);
 	}
-//	test(fdf);
 }

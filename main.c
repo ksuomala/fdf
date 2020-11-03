@@ -6,13 +6,11 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 17:18:41 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/10/27 14:14:10 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/02 22:25:58 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	ft_test_mlx(t_map *fdf);
 
 void	ft_errors(int val)
 {
@@ -38,6 +36,7 @@ int		main(int ac, char **av)
 	ft_read_map(av, &fdf);
 	ft_init_window(&fdf);
 	ft_draw_image(&fdf);
+	ft_keypress(&fdf);
 	mlx_loop(fdf.mlx);
 	return (0);
 }

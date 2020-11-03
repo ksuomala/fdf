@@ -6,13 +6,13 @@
 #    By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/27 14:08:38 by ksuomala          #+#    #+#              #
-#    Updated: 2020/10/28 22:55:13 by ksuomala         ###   ########.fr        #
+#    Updated: 2020/11/03 02:18:41 by ksuomala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRCS = main.c read_map.c test_fdf.c draw_map.c colors.c
+SRCS = main.c read_map.c test_fdf.c draw_map.c colors.c conversion.c
 
 SRCS_DIR = srcs/
 
@@ -24,7 +24,7 @@ LIBFT = libft/libft.a
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 
 LINKS = -I libft/ -L libft \
 	-I /usr/local/include -L /usr/local/lib \
