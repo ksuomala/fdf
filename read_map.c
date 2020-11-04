@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 23:17:55 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/03 03:46:32 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 00:45:14 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ static t_pt		*ft_arr_atoi(char **split, t_map *fdf, int y)
 	while (split[i])
 	{
 		ret[i].z = ft_atoi(split[i]);
+		if (ret[i].z > fdf->peak_z)
+			fdf->peak_z = ret[i].z;
+		if (ret[i].z < fdf->bottom_z)
+			fdf->bottom_z = ret[i].z;
 		ret[i].x = i;
 		ret[i].y = y;
-		ret[i].color = ft_color(ret[i].z);
-//		ft_rotate_z(&ret[i].x, &ret[i].y, 0.3);
 		i++;
 	}
 	return (ret);
@@ -35,17 +37,43 @@ static t_pt		*ft_arr_atoi(char **split, t_map *fdf, int y)
 
 static void		ft_realloc_map(t_map *fdf)
 {
-		t_pt	**tmp;
+	t_pt	**tmp;
 
-		if (!(tmp = ft_memdup(fdf->map, sizeof(t_pt*) * fdf->size)))
-			ft_errors(0);
-		free(fdf->map);
-		fdf->size *= 2;
-		if (!(fdf->map = ft_memalloc(sizeof(t_pt*) * fdf->size)))
-			ft_errors(0);
-		fdf->map = ft_memcpy(fdf->map, tmp, sizeof(t_pt*) * (fdf->size / 2));
-		free(tmp);
-		ft_printf("realloc\n");
+	if (!(tmp = ft_memdup(fdf->map, sizeof(t_pt*) * fdf->size)))
+		ft_errors(0);
+	free(fdf->map);
+	fdf->size *= 2;
+	if (!(fdf->map = ft_memalloc(sizeof(t_pt*) * fdf->size)))
+		ft_errors(0);
+	fdf->map = ft_memcpy(fdf->map, tmp, sizeof(t_pt*) * (fdf->size / 2));
+	free(tmp);
+	ft_printf("realloc\n");
+}
+
+void			ft_zero_to_middle(t_map *fdf)
+{
+	int y;
+	int x;
+
+	y = 0;
+	x = 0;
+	fdf->peak_z *= fdf->img->scale;
+	fdf->bottom_z *= fdf->img->scale;
+	while (y < fdf->rows)
+	{
+		while (x < fdf->row_len)
+		{
+			fdf->map[y][x].color = 0xFF;
+			fdf->map[y][x].x *= fdf->img->scale;
+			fdf->map[y][x].y *= fdf->img->scale;
+			fdf->map[y][x].z *= fdf->img->scale;
+			fdf->map[y][x].x -= (fdf->row_len - 1) * fdf->img->scale / 2;
+			fdf->map[y][x].y -= (fdf->rows - 1) * fdf->img->scale / 2;
+			x++;
+		}
+		y++;
+		x = 0;
+	}
 }
 
 static void		ft_create_map(t_map *fdf, char *line)
