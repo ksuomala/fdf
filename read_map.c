@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 23:17:55 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 22:38:24 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 23:23:25 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void			ft_zero_to_middle(t_map *fdf)
 
 	y = 0;
 	x = 0;
+	fdf->z_div = ((fdf->max_z > 400 || fdf->min_z < -400) ? ft_z_div(fdf) : 0);
 	fdf->max_z *= fdf->img->scale;
 	fdf->min_z *= fdf->img->scale;
 	while (y < fdf->row_count)
@@ -75,6 +76,8 @@ void			ft_zero_to_middle(t_map *fdf)
 			fdf->map[y][x].color = 0xFF;
 			fdf->map[y][x].x *= fdf->img->scale;
 			fdf->map[y][x].y *= fdf->img->scale;
+			if (fdf->z_div)
+				fdf->map[y][x].z /= fdf->z_div;
 			fdf->map[y][x].z *= fdf->img->scale;
 			fdf->map[y][x].x -= (fdf->row_len_max - 1) * fdf->img->scale / 2;
 			fdf->map[y][x].y -= (fdf->row_count - 1) * fdf->img->scale / 2;

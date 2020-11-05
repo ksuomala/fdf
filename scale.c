@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 02:16:59 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 20:05:32 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 23:23:31 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ void	ft_set_scale(t_map *fdf, t_bitmap *map)
 	while (map->height * map->scale * 2 <= WIN_Y && map->width\
 	* map->scale * 2 <= WIN_X)
 		map->scale += 3;
+}
+
+int		ft_z_div(t_map *fdf)
+{
+	int div;
+
+	div = 1;
+	while (fdf->max_z / div > 200 || fdf->min_z / div < -200)
+		div++;
+	fdf->max_z /= div;
+	fdf->min_z /= div;
+	return (div);
 }
 
 void	ft_mid(t_map *fdf)

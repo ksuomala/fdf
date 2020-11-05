@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 17:08:45 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 20:05:43 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 23:23:40 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct	s_map
 	int			size;
 	int			row_count;
 	int			row_len_max;
+	int			z_div;
 	float		max_z;
 	float		min_z;
 }				t_map;
@@ -101,6 +102,7 @@ void			ft_set_height(t_map *fdf);
 void			ft_set_scale(t_map *fdf, t_bitmap *map);
 void			ft_multiply_scale(t_pt *start, t_pt *end, int scale);
 void			ft_mid(t_map *fdf);
+int				ft_z_div(t_map *fdf);
 
 t_pt			ft_rotate_z(float x, float y, float angle);
 t_pt			ft_convert_xy(t_pt *p, float amplitude,\
