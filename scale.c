@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conversion.c                                       :+:      :+:    :+:   */
+/*   scale.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 02:16:59 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 16:00:46 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 20:05:32 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,10 @@ void	ft_set_scale(t_map *fdf, t_bitmap *map)
 	while (map->height * map->scale * 2 <= WIN_Y && map->width\
 	* map->scale * 2 <= WIN_X)
 		map->scale += 3;
-	ft_printf("scale = %d", map->scale);
 }
 
 void	ft_mid(t_map *fdf)
 {
-	fdf->end_x = fdf->row_len_max - fdf->start_x;
-	fdf->end_y = fdf->row_count - fdf->start_y;
 	fdf->img->mid_y = WIN_Y / 2;
 	fdf->img->mid_x = WIN_X / 2;
 }
