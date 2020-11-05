@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 22:46:01 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 19:54:37 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 22:36:35 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_toggle_colors(t_map *fdf)
 	x = 0;
 	while (y < fdf->row_count)
 	{
-		while (x < fdf->row_len_max)
+		while (x < fdf->row_len[y])
 		{
 			if (fdf->img->color_mode == 1)
 				fdf->map[y][x].color = ft_color_simple((int)fdf->map[y][x].z,\

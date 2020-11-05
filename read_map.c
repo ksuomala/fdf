@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 23:17:55 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 19:47:14 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 22:38:24 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			ft_zero_to_middle(t_map *fdf)
 	fdf->min_z *= fdf->img->scale;
 	while (y < fdf->row_count)
 	{
-		while (x < fdf->row_len_max)
+		while (x < fdf->row_len[y])
 		{
 			fdf->map[y][x].color = 0xFF;
 			fdf->map[y][x].x *= fdf->img->scale;
