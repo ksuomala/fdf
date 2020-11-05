@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 19:51:28 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 02:04:32 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 17:57:09 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ void		ft_draw_map_pro(t_map *fdf, int index)
 	rad = ((index == 1) ? RAD_MIL : RAD_ISO);
 	y = 0;
 	x = 0;
-	while (y < fdf->rows)
+	while (y < fdf->row_count)
 	{
-		while (x < fdf->row_len)
+		while (x < fdf->row_len_max)
 		{
-			if (x + 1 < fdf->row_len)
+			if (x + 1 < fdf->row_len_max)
 				ft_drawline(ft_convert_xy(&fdf->map[y][x], fdf->img->amp,\
 				fdf->img, rad), ft_convert_xy(&fdf->map[y][x + 1],\
 				fdf->img->amp, fdf->img, rad), fdf->img);
-			if (y + 1 < fdf->rows)
+			if (y + 1 < fdf->row_count)
 				ft_drawline(ft_convert_xy(&fdf->map[y][x], fdf->img->amp,\
 				fdf->img, rad), ft_convert_xy(&fdf->map[y + 1][x],\
 				fdf->img->amp, fdf->img, rad), fdf->img);
@@ -90,16 +90,17 @@ void		ft_draw_map(t_map *fdf)
 
 	y = 0;
 	x = 0;
+//	ft_printf("row_len[0 = %d][1 = %d][2 = %d], row_len_max = %d", fdf->row_len[0], fdf->row_len[1], fdf->row_len[2], fdf->row_len_max);
 	if (fdf->img->pro)
 		ft_draw_map_pro(fdf, fdf->img->pro - 1);
-	while (y < fdf->end_y && !fdf->img->pro)
+	while (y < fdf->row_count && !fdf->img->pro)
 	{
-		while (x < fdf->end_x)
+		while (x < fdf->row_len[y])
 		{
-			if (x + 1 < fdf->row_len)
+			if (x + 1 < fdf->row_len[y])
 				ft_drawline(ft_paral_rot(&fdf->map[y][x], fdf->img),\
 				ft_paral_rot(&fdf->map[y][x + 1], fdf->img), fdf->img);
-			if (y + 1 < fdf->rows)
+			if (y + 1 < fdf->row_count && x < fdf->row_len[y + 1])
 				ft_drawline(ft_paral_rot(&fdf->map[y][x], fdf->img),\
 				ft_paral_rot(&fdf->map[y + 1][x], fdf->img), fdf->img);
 			x++;

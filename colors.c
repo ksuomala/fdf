@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 22:46:01 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 02:06:27 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 16:37:41 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int		ft_color_3(int z, int max, int min)
 	int color;
 
 	if (z > max * 0.7)
-		color = 0xFF0000;
+		color = 0x2d3034;
 	else if (z > max / 2)
-		color = 0xFFFF00;
+		color = 0x3a4157;
 	else if (z > max / 5)
-		color = 0xFF00;
+		color = 0xFFFFFF;
 	else if (z > max / 10)
-		color = 0x3E418;
+		color = 0x255000;
 	else if (z < min / 2)
 		color = 0xFF;
 	else if (z < min * 0.7)
@@ -31,6 +31,7 @@ int		ft_color_3(int z, int max, int min)
 	else if (z < 0)
 		color = 0x88;
 	else
+	//	color = 0x3E418;
 		color = 0xFFFFFF;
 	return (color);
 }
@@ -64,7 +65,7 @@ int		ft_opaque(float z, float top, float bottom)
 		bottom -= bottom - 1;
 		z -= bottom;
 	}
-	return (0xFF00 * (z + bottom / top + bottom));
+	return ((int)(0xFF * (z + bottom / top + bottom)) << 8);
 }
 
 void	ft_toggle_colors(t_map *fdf)
@@ -74,19 +75,19 @@ void	ft_toggle_colors(t_map *fdf)
 
 	y = 0;
 	x = 0;
-	while (y < fdf->rows)
+	while (y < fdf->row_count)
 	{
-		while (x < fdf->row_len)
+		while (x < fdf->row_len_max)
 		{
 			if (fdf->img->c == 1)
 				fdf->map[y][x].color = ft_color_simple((int)fdf->map[y][x].z,\
-				fdf->peak_z);
+				fdf->max_z);
 			else if (fdf->img->c == 2)
 				fdf->map[y][x].color = ft_color_3((int)fdf->map[y][x].z,\
-				fdf->peak_z, fdf->bottom_z);
+				fdf->max_z, fdf->min_z);
 			else
 				fdf->map[y][x].color = ft_opaque(fdf->map[y][x].z,\
-				fdf->peak_z, fdf->bottom_z);
+				fdf->max_z, fdf->min_z);
 			x++;
 		}
 		y++;
