@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 02:16:59 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 00:40:36 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 02:06:56 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ void	ft_multiply_scale(t_pt *start, t_pt *end, int scale)
 	end->x *= scale;
 	start->z *= scale;
 	end->z *= scale;
-}
-
-void	ft_not_in_window(t_bitmap *img)
-{
-	img->outside_x = 0;
-	img->outside_y = 0;
 }
 
 void	ft_set_scale(t_map *fdf, t_bitmap *map)

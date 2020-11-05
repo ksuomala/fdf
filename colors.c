@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 22:46:01 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 00:37:14 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 02:06:27 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,28 @@ int		ft_color_simple(int z, int max)
 	return (color);
 }
 
+int		ft_opaque(float z, float top, float bottom)
+{
+	if ((int)z == 0 | (int)top == 0 | (int)bottom == 0)
+	{
+		z++;
+		top++;
+		bottom++;
+	}
+	if (bottom < 0)
+	{
+		top -= bottom;
+		bottom -= bottom - 1;
+		z -= bottom;
+	}
+	return (0xFF00 * (z + bottom / top + bottom));
+}
+
 void	ft_toggle_colors(t_map *fdf)
 {
 	int	y;
 	int x;
 
-	if (fdf->img->c == 4)
-		fdf->img->c = 0;
-	fdf->img->c++;
 	y = 0;
 	x = 0;
 	while (y < fdf->rows)
@@ -71,7 +85,8 @@ void	ft_toggle_colors(t_map *fdf)
 				fdf->map[y][x].color = ft_color_3((int)fdf->map[y][x].z,\
 				fdf->peak_z, fdf->bottom_z);
 			else
-				fdf->map[y][x].color = 0xFF;
+				fdf->map[y][x].color = ft_opaque(fdf->map[y][x].z,\
+				fdf->peak_z, fdf->bottom_z);
 			x++;
 		}
 		y++;
