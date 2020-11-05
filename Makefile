@@ -6,7 +6,7 @@
 #    By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/27 14:08:38 by ksuomala          #+#    #+#              #
-#    Updated: 2020/11/05 19:28:32 by ksuomala         ###   ########.fr        #
+#    Updated: 2020/11/05 20:24:51 by ksuomala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(FLAGS) $(OBJS) -o $(NAME) $(LINKS)
 	@echo "executable compiled!"
 
-$(OBJS): $(LIBFT) $(SRCS)
+$(OBJS): $(LIBFT) $(SRCS) $(OBJ_DIR)
 	@echo "Compiling..."
 	@$(CC) $(FLAGS) -c $(SRCS) -I libft
 	@echo "Compiled. Moving .o files..."
@@ -47,6 +47,9 @@ $(OBJS): $(LIBFT) $(SRCS)
 
 $(LIBFT):
 	@make -C libft
+
+$(OBJ_DIR)
+	mkdir $(OBJ_DIR)
 
 clean:
 	@make -C libft clean
