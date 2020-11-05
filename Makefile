@@ -6,13 +6,14 @@
 #    By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/27 14:08:38 by ksuomala          #+#    #+#              #
-#    Updated: 2020/11/03 02:18:41 by ksuomala         ###   ########.fr        #
+#    Updated: 2020/11/05 00:51:46 by ksuomala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRCS = main.c read_map.c test_fdf.c draw_map.c colors.c conversion.c
+SRCS = main.c read_map.c mlx_keys.c draw_map.c colors.c conversion.c\
+convert_coordinates.c
 
 SRCS_DIR = srcs/
 
