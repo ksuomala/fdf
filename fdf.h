@@ -6,12 +6,12 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 17:08:45 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 18:54:53 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 20:05:43 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _FDF_H_
-# define _FDF_H_
+#ifndef FDF_H
+# define FDF_H
 # define WIN_Y 1080
 # define WIN_X 1920
 
@@ -39,7 +39,6 @@
 # include "math.h"
 # include "libft.h"
 
-
 typedef struct	s_pt
 {
 	int			color;
@@ -64,61 +63,54 @@ typedef struct	s_bitmap
 	int			height;
 	int			move_y;
 	int			move_x;
-	int			outside_x;
-	int			outside_y;
 	int			mid_y;
 	int			mid_x;
 	float		amp;
 	int			pro;
-	int			c;
+	int			color_mode;
 }				t_bitmap;
 
 typedef struct	s_map
 {
-//	char		**in;
 	t_bitmap	*img;
 	t_pt		**map;
 	void		*mlx;
 	void		*win;
-//	void		*img;
 	int			*row_len;
 	int			size;
 	int			row_count;
 	int			row_len_max;
 	float		max_z;
 	float		min_z;
-	int			start_x;
-	int			start_y;
-	int			end_x;
-	int			end_y;
-} 				t_map;
+}				t_map;
 
-void	ft_read_map(char **av, t_map *fdf);
-void	ft_init_window(t_map *fdf);
-void	ft_errors(int val);
-void	ft_draw_image(t_map *fdf);
-void	ft_keypress(t_map *fdf);
-int		ft_key_mod(int key, t_bitmap *img);
-int		ft_scale(t_map *fdf, t_bitmap *map);
+void			ft_read_map(char **av, t_map *fdf);
+void			ft_init_window(t_map *fdf);
+void			ft_errors(int val);
+void			ft_draw_image(t_map *fdf);
+void			ft_keypress(t_map *fdf);
+int				ft_key_mod(int key, t_bitmap *img);
+int				ft_scale(t_map *fdf, t_bitmap *map);
 
-int		ft_color_simple(int z, int max);
-int		ft_color(int z, int max, int min);
-int		ft_average_rgb(int start, int end);
-void	ft_toggle_colors(t_map *fdf);
+int				ft_color_simple(int z, int max);
+int				ft_color(int z, int max, int min);
+int				ft_average_rgb(int start, int end);
+void			ft_toggle_colors(t_map *fdf);
 
-void	ft_set_height(t_map *fdf);
-void	ft_set_scale(t_map *fdf, t_bitmap *map);
-void	ft_multiply_scale(t_pt *start, t_pt *end, int scale);
-void	ft_mid(t_map *fdf);
+void			ft_set_height(t_map *fdf);
+void			ft_set_scale(t_map *fdf, t_bitmap *map);
+void			ft_multiply_scale(t_pt *start, t_pt *end, int scale);
+void			ft_mid(t_map *fdf);
 
-t_pt	ft_rotate_z(float x, float y, float angle);
-t_pt	ft_convert_xy(t_pt *p, float amplitude, t_bitmap *img, double rad);
-void	ft_zero_to_middle(t_map *fdf);
-t_pt	ft_paral_rot(t_pt *p, t_bitmap *img);
-void	ft_multiply_zoom(t_pt *s, t_pt *e, float zoom);
+t_pt			ft_rotate_z(float x, float y, float angle);
+t_pt			ft_convert_xy(t_pt *p, float amplitude,\
+t_bitmap *img, double rad);
+void			ft_zero_to_middle(t_map *fdf);
+t_pt			ft_paral_rot(t_pt *p, t_bitmap *img);
+void			ft_multiply_zoom(t_pt *s, t_pt *e, float zoom);
 
-void	ft_change_rotation(t_map *fdf);
+void			ft_change_rotation(t_map *fdf);
 
-int		ft_exit(void);
+int				ft_exit(void);
 
 #endif

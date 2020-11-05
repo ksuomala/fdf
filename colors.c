@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 22:46:01 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 16:37:41 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 19:54:37 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		ft_color_3(int z, int max, int min)
 	else if (z < 0)
 		color = 0x88;
 	else
-	//	color = 0x3E418;
 		color = 0xFFFFFF;
 	return (color);
 }
@@ -79,10 +78,10 @@ void	ft_toggle_colors(t_map *fdf)
 	{
 		while (x < fdf->row_len_max)
 		{
-			if (fdf->img->c == 1)
+			if (fdf->img->color_mode == 1)
 				fdf->map[y][x].color = ft_color_simple((int)fdf->map[y][x].z,\
 				fdf->max_z);
-			else if (fdf->img->c == 2)
+			else if (fdf->img->color_mode == 2)
 				fdf->map[y][x].color = ft_color_3((int)fdf->map[y][x].z,\
 				fdf->max_z, fdf->min_z);
 			else

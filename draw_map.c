@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 19:51:28 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 17:57:09 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 19:56:11 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		ft_drawline(t_pt start, t_pt end, t_bitmap *map)
 	dy = dy / step;
 	i = 1;
 	color = start.color;
-	if (map->c == 2)
+	if (map->color_mode == 2)
 		color = ft_average_rgb(start.color, end.color);
 	while (i <= step)
 	{
@@ -66,13 +66,13 @@ void		ft_draw_map_pro(t_map *fdf, int index)
 	x = 0;
 	while (y < fdf->row_count)
 	{
-		while (x < fdf->row_len_max)
+		while (x < fdf->row_len[y])
 		{
-			if (x + 1 < fdf->row_len_max)
+			if (x + 1 < fdf->row_len[y])
 				ft_drawline(ft_convert_xy(&fdf->map[y][x], fdf->img->amp,\
 				fdf->img, rad), ft_convert_xy(&fdf->map[y][x + 1],\
 				fdf->img->amp, fdf->img, rad), fdf->img);
-			if (y + 1 < fdf->row_count)
+			if (y + 1 < fdf->row_count && x < fdf->row_len[y + 1])
 				ft_drawline(ft_convert_xy(&fdf->map[y][x], fdf->img->amp,\
 				fdf->img, rad), ft_convert_xy(&fdf->map[y + 1][x],\
 				fdf->img->amp, fdf->img, rad), fdf->img);
@@ -90,7 +90,6 @@ void		ft_draw_map(t_map *fdf)
 
 	y = 0;
 	x = 0;
-//	ft_printf("row_len[0 = %d][1 = %d][2 = %d], row_len_max = %d", fdf->row_len[0], fdf->row_len[1], fdf->row_len[2], fdf->row_len_max);
 	if (fdf->img->pro)
 		ft_draw_map_pro(fdf, fdf->img->pro - 1);
 	while (y < fdf->row_count && !fdf->img->pro)

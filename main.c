@@ -6,17 +6,11 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 17:18:41 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 18:54:18 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 19:45:46 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-// linelen[i]
-// clean the structs?
-// leaks
-// etc
-// eval?
 
 int		ft_exit(void)
 {

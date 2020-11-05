@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 23:40:42 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 02:06:43 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 19:54:36 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	ft_more_keys(int key, t_map *fdf)
 		fdf->img->rot_z += 0.03;
 	if (key == C)
 	{
-		if (fdf->img->c == 3)
-			fdf->img->c = 0;
-		fdf->img->c++;
+		if (fdf->img->color_mode == 3)
+			fdf->img->color_mode = 0;
+		fdf->img->color_mode++;
 		ft_toggle_colors(fdf);
 	}
 }

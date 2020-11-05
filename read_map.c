@@ -6,7 +6,7 @@
 /*   By: ksuomala <ksuomala@student.hive.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 23:17:55 by ksuomala          #+#    #+#             */
-/*   Updated: 2020/11/05 18:56:51 by ksuomala         ###   ########.fr       */
+/*   Updated: 2020/11/05 19:47:14 by ksuomala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void		ft_realloc_map(t_map *fdf)
 	if (!(fdf->row_len = ft_memalloc(sizeof(int) * fdf->size)))
 		ft_errors(0);
 	fdf->map = ft_memcpy(fdf->map, temp_map, sizeof(t_pt*) * (fdf->size / 2));
-	fdf->row_len = ft_memcpy(fdf->row_len, temp_rowlen, sizeof(int) * (fdf->size / 2));
+	fdf->row_len = ft_memcpy(fdf->row_len, temp_rowlen, sizeof(int) *\
+	(fdf->size / 2));
 	free(temp_map);
 	free(temp_rowlen);
 	ft_printf("realloc\n");
@@ -127,5 +128,4 @@ void			ft_read_map(char **av, t_map *fdf)
 		ft_create_row(fdf, line);
 		free(line);
 	}
-	ft_printf("row_len[0 = %d][1 = %d][2 = %d], row_len_max = %d", fdf->row_len[0], fdf->row_len[1], fdf->row_len[2], fdf->row_len_max);
 }
