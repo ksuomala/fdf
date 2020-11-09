@@ -53,7 +53,7 @@ int		main(int ac, char **av)
 	ft_bzero(&fdf, sizeof(t_map));
 	if (ac != 2)
 	{
-		ft_printf("Usage : ./fillit input_file\n");
+		ft_printf("Usage : ./fdf input_file\n");
 		return (0);
 	}
 	ft_read_map(av, &fdf);
