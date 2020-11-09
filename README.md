@@ -12,3 +12,6 @@ For the user:
 
 	All inputs will be converted to integers from characters. Spacing rules will work according to man atoi. Maps with
 	lines of different lengths will work.
+
+![WORLD-ICE](https://github.com/ksuomala/fdf/blob/master/images/fdf_world_ice.png)
+
